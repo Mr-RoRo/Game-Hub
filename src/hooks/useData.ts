@@ -1,4 +1,4 @@
-import { CanceledError } from "axios";
+import { AxiosRequestConfig, CanceledError } from "axios";
 import { useState, useEffect } from "react";
 import apiClient from "../services/api-client";
 
@@ -7,7 +7,7 @@ interface FetchGenres<T> {
     results: T[];
   }
 
-const useData =<T> (endpoint : string) => {
+const useData =<T> (endpoint : string, reauestConfig?:AxiosRequestConfig,deps?:any[]) => {
   const [datas, setDatas] = useState<T[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -15,7 +15,7 @@ const useData =<T> (endpoint : string) => {
     const controller = new AbortController();
     setLoading(true);
     apiClient
-      .get<FetchGenres<T>>(endpoint, { signal: controller.signal })
+      .get<FetchGenres<T>>(endpoint, { signal: controller.signal ,...reauestConfig})
       .then((res) => {
         setDatas(res.data.results);
         setLoading(false);
@@ -27,7 +27,7 @@ const useData =<T> (endpoint : string) => {
       });
 
     return () => controller.abort();
-  }, []);
+  }, deps ? [...deps] : []);
 
   return { datas, error, isLoading };
 };
