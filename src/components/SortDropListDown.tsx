@@ -1,5 +1,5 @@
 import { Menu, MenuButton, Button, MenuList, MenuItem } from "@chakra-ui/react";
-import { BsChevronDown } from "react-icons/Bs";
+import { BsChevronDown } from "react-icons/bs";
 
 interface Props {
   onSortList: (sort: string) => void;

@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo } from "react-icons/si";
-import { BsGlobe } from "react-icons/Bs";
+import { BsGlobe } from "react-icons/bs";
 import { IconType } from "react-icons";
 interface Props {
   platforms: Platform[];
