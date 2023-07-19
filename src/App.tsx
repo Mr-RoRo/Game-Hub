@@ -8,21 +8,27 @@ import PlatformList from "./components/PlatformList";
 import { Platform } from "./hooks/useGames";
 import SortDropListDown from "./components/SortDropListDown";
 import { GameHeading } from "./components/GameHeading";
+import DrawerGenresMobile from "./components/DrawerGenresMobile";
 
 export interface GameQuary {
   genre: Genres | null;
   platform: Platform | null;
   sortOrder: string;
-  searchText: string
+  searchText: string;
 }
 
 function App() {
   const [gameQuary, setGameQuary] = useState<GameQuary>({} as GameQuary);
-
+  const genresNode = (
+    <GenresGames
+      selectedGenres={gameQuary.genre}
+      onSelectGenres={(genre) => setGameQuary({ ...gameQuary, genre })}
+    />
+  );
   return (
     <Grid
       templateAreas={{
-        base: `"nav" "main"`,
+        base: `"nav" "aside" "main"`,
         lg: `"nav nav" "aside main"`,
       }}
       templateColumns={{
@@ -31,14 +37,21 @@ function App() {
       }}
     >
       <GridItem area={"nav"}>
-        <NavBar searchText={(searchText) => setGameQuary({...gameQuary,searchText})} />
+        <NavBar
+          searchText={(searchText) =>
+            setGameQuary({ ...gameQuary, searchText })
+          }
+        >
+          <Show below="lg">
+            <DrawerGenresMobile>
+            {genresNode}
+            </DrawerGenresMobile>
+          </Show>
+        </NavBar>
       </GridItem>
       <Show above="lg">
         <GridItem area={"aside"} paddingX={3} paddingY="35px">
-          <GenresGames
-            selectedGenres={gameQuary.genre}
-            onSelectGenres={(genre) => setGameQuary({ ...gameQuary, genre })}
-          />
+          {genresNode}
         </GridItem>
       </Show>
       <GridItem padding={8} area={"main"}>
