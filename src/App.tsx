@@ -5,28 +5,29 @@ import GenresGames from "./components/GenresGames";
 import { useState } from "react";
 import { Genres } from "./hooks/useGenres";
 
-
 function App() {
-  const [selectedGenres , setSelectedGenres] = useState<Genres | null>(null)
-
+  const [selectedGenres, setSelectedGenres] = useState<Genres | null>(null);
 
   return (
     <Grid
       templateAreas={{
         base: `"nav" "main"`,
-        lg: `"nav nav" "aside main"`
+        lg: `"nav nav" "aside main"`,
       }}
       templateColumns={{
-        base:"1fr",
-        lg:"200px 1fr"
+        base: "1fr",
+        lg: "200px 1fr",
       }}
     >
-      <GridItem area={"nav"} >
+      <GridItem area={"nav"}>
         <NavBar />
       </GridItem>
       <Show above="lg">
         <GridItem area={"aside"} paddingX={3} paddingY="35px">
-          <GenresGames onSelectGenres={(genre) => setSelectedGenres(genre)} />
+          <GenresGames
+            selectedGenres={selectedGenres}
+            onSelectGenres={(genre) => setSelectedGenres(genre)}
+          />
         </GridItem>
       </Show>
       <GridItem area={"main"}>

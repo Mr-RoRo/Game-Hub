@@ -5,11 +5,11 @@ import CardSkelet from "./CardSkelet";
 import BoxCards from "./BoxCards";
 import { Genres } from "../hooks/useGenres";
 
-interface Props{
-  selectedGenres: Genres | null
+interface Props {
+  selectedGenres: Genres | null;
 }
 
-const GameGrid = ({selectedGenres} : Props) => {
+const GameGrid = ({ selectedGenres }: Props) => {
   const { datas, error, isLoading } = useGames(selectedGenres);
   const skeleton = [1, 2, 3, 4, 5, 6];
   return (
@@ -20,12 +20,15 @@ const GameGrid = ({selectedGenres} : Props) => {
         padding={10}
         spacing={3}
       >
-        {isLoading && skeleton.map((skelet) => <BoxCards>
-          <CardSkelet key={skelet} />
-        </BoxCards>)}
+        {isLoading &&
+          skeleton.map((skelet) => (
+            <BoxCards key={skelet}>
+              <CardSkelet />
+            </BoxCards>
+          ))}
         {datas.map((game) => (
-          <BoxCards>
-            <GameCard key={game.id} game={game} />
+          <BoxCards key={game.id}>
+            <GameCard game={game} />
           </BoxCards>
         ))}
       </SimpleGrid>
