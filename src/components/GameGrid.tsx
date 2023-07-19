@@ -13,23 +13,21 @@ interface Props {
 const GameGrid = ({ gameQuary }: Props) => {
   const { datas, error, isLoading } = useGames(gameQuary);
   const skeleton = [1, 2, 3, 4, 5, 6];
+  if (error) return error && <Text>{error}</Text>;
   return (
-    <>
-      {error && <Text>{error}</Text>}
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
-        {isLoading &&
-          skeleton.map((skelet) => (
-            <BoxCards key={skelet}>
-              <CardSkelet />
-            </BoxCards>
-          ))}
-        {datas.map((game) => (
-          <BoxCards key={game.id}>
-            <GameCard game={game} />
+    <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
+      {isLoading &&
+        skeleton.map((skelet) => (
+          <BoxCards key={skelet}>
+            <CardSkelet />
           </BoxCards>
         ))}
-      </SimpleGrid>
-    </>
+      {datas.map((game) => (
+        <BoxCards key={game.id}>
+          <GameCard game={game} />
+        </BoxCards>
+      ))}
+    </SimpleGrid>
   );
 };
 export default GameGrid;
