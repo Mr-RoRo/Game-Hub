@@ -12,6 +12,7 @@ export interface GameQuary {
   genre: Genres | null;
   platform: Platform | null;
   sortOrder: string;
+  searchText: string
 }
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
       }}
     >
       <GridItem area={"nav"}>
-        <NavBar />
+        <NavBar searchText={(searchText) => setGameQuary({...gameQuary,searchText})} />
       </GridItem>
       <Show above="lg">
         <GridItem area={"aside"} paddingX={3} paddingY="35px">
