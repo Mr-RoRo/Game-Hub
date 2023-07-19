@@ -7,6 +7,7 @@ import { Genres } from "./hooks/useGenres";
 import PlatformList from "./components/PlatformList";
 import { Platform } from "./hooks/useGames";
 import SortDropListDown from "./components/SortDropListDown";
+import { GameHeading } from "./components/GameHeading";
 
 export interface GameQuary {
   genre: Genres | null;
@@ -41,6 +42,7 @@ function App() {
         </GridItem>
       </Show>
       <GridItem padding={8} area={"main"}>
+        <GameHeading gameQuary={gameQuary} />
         <HStack>
           <PlatformList
             selcetedPlatforms={gameQuary.platform}
