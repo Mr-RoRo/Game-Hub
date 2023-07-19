@@ -11,6 +11,7 @@ import SortDropListDown from "./components/SortDropListDown";
 export interface GameQuary {
   genre: Genres | null;
   platform: Platform | null;
+  sortOrder: string;
 }
 
 function App() {
@@ -46,7 +47,12 @@ function App() {
               setGameQuary({ ...gameQuary, platform })
             }
           />
-          <SortDropListDown />
+          <SortDropListDown
+            sortList={gameQuary.sortOrder}
+            onSortList={(sortOrder) =>
+              setGameQuary({ ...gameQuary, sortOrder })
+            }
+          />
         </HStack>
         <GameGrid gameQuary={gameQuary} />
       </GridItem>

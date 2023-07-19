@@ -28,7 +28,7 @@ const GenresGames = ({ selectedGenres, onSelectGenres }: Props) => {
               borderRadius={8}
               src={imageOpt(genre.image_background)}
             />
-            <Button
+            <Button whiteSpace="pre-wrap"
               fontWeight={selectedGenres?.id === genre.id ? "bold" : "normal"}
               onClick={() => onSelectGenres(genre)}
               variant={"link"}

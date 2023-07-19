@@ -1,6 +1,5 @@
 import { GameQuary } from "../App";
 import useData from "./useData";
-import { Genres } from "./useGenres";
 
 export interface Platform {
   id: number;
@@ -23,6 +22,7 @@ const useGames = (gameQuary: GameQuary) =>
       params: {
         genres: gameQuary.genre?.id,
         platforms: gameQuary.platform?.id,
+        ordering: gameQuary.sortOrder,
       },
     },
     [gameQuary]
